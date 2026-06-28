@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Calculator, Clock, DollarSign, Sparkles } from 'lucide-react';
+import { Calculator, Clock, Sparkles } from 'lucide-react';
 import './styles.css';
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
@@ -26,7 +26,6 @@ function App() {
     projectDays: '10',
     extraCosts: '300',
   });
-  const [hasCalculated, setHasCalculated] = useState(false);
 
   const result = useMemo(() => {
     const monthlySalary = parseCurrency(form.monthlySalary);
@@ -55,16 +54,11 @@ function App() {
     setForm((current) => ({ ...current, [name]: value }));
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    setHasCalculated(true);
-  }
-
   return (
     <main className="page-shell">
       <section className="hero">
         <div className="hero-copy">
-          <span className="eyebrow">PrecifiqueSE</span>
+          <span className="eyebrow">Precifique-se</span>
           <h1>Transforme sua meta mensal em um preço justo por projeto.</h1>
           <p>
             Calcule seu valor por hora, por dia e o total do projeto considerando
@@ -73,8 +67,8 @@ function App() {
         </div>
       </section>
 
-      <section className="calculator-layout" aria-label="Calculadora de precificacao">
-        <form className="calculator-panel" onSubmit={handleSubmit}>
+      <section className="calculator-layout" aria-label="Calculadora de precificação">
+        <div className="calculator-panel">
           <div className="panel-heading">
             <Calculator aria-hidden="true" size={24} />
             <div>
@@ -144,34 +138,29 @@ function App() {
               />
             </label>
           </div>
-
-          <button className="primary-button" type="submit">
-            <DollarSign aria-hidden="true" size={20} />
-            Calcular
-          </button>
-        </form>
+        </div>
 
         <aside className="results-panel" aria-live="polite">
           <div className="panel-heading">
             <Sparkles aria-hidden="true" size={24} />
             <div>
               <h2>Resultado</h2>
-              <p>{hasCalculated ? 'Valores sugeridos para cobrança.' : 'Preencha e calcule.'}</p>
+              <p>Valores atualizados automaticamente.</p>
             </div>
           </div>
 
           <div className="result-list">
             <article>
               <span>Valor por hora</span>
-              <strong>{hasCalculated ? formatCurrency(result.hourlyRate) : 'R$ 0,00'}</strong>
+              <strong>{formatCurrency(result.hourlyRate)}</strong>
             </article>
             <article>
               <span>Valor por dia</span>
-              <strong>{hasCalculated ? formatCurrency(result.dailyRate) : 'R$ 0,00'}</strong>
+              <strong>{formatCurrency(result.dailyRate)}</strong>
             </article>
             <article className="highlight">
               <span>Valor do projeto</span>
-              <strong>{hasCalculated ? formatCurrency(result.projectTotal) : 'R$ 0,00'}</strong>
+              <strong>{formatCurrency(result.projectTotal)}</strong>
             </article>
           </div>
 
@@ -179,8 +168,8 @@ function App() {
             <Clock aria-hidden="true" size={20} />
             <p>
               Base de {result.monthlyHours || 0} horas mensais. O projeto soma{' '}
-              {hasCalculated ? formatCurrency(result.projectLabor) : 'R$ 0,00'} em horas
-              trabalhadas e {hasCalculated ? formatCurrency(result.extraCosts) : 'R$ 0,00'} em custos extras.
+              {formatCurrency(result.projectLabor)} em horas trabalhadas e{' '}
+              {formatCurrency(result.extraCosts)} em custos extras.
             </p>
           </div>
         </aside>

@@ -19,7 +19,6 @@ body {
   min-height: 100vh;
 }
 
-button,
 input {
   font: inherit;
 }
@@ -164,30 +163,6 @@ input:focus {
 
 .field-wide {
   grid-column: 1 / -1;
-}
-
-.primary-button {
-  display: inline-flex;
-  width: 100%;
-  min-height: 54px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 22px;
-  border: 0;
-  border-radius: 8px;
-  background: #0d775f;
-  color: #fff;
-  cursor: pointer;
-  font-weight: 800;
-  transition:
-    background 160ms ease,
-    transform 160ms ease;
-}
-
-.primary-button:hover {
-  background: #095d4c;
-  transform: translateY(-1px);
 }
 
 .result-list {
