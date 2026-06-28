@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Calculator, Clock, Sparkles } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import './styles.css';
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
@@ -55,7 +56,8 @@ function App() {
   }
 
   return (
-    <main className="page-shell">
+    <>
+      <main className="page-shell">
       <section className="hero">
         <div className="hero-copy">
           <span className="eyebrow">Precifique-se</span>
@@ -174,7 +176,9 @@ function App() {
           </div>
         </aside>
       </section>
-    </main>
+      </main>
+      <Analytics />
+    </>
   );
 }
 
